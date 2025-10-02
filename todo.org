@@ -1,0 +1,36 @@
+#+TITLE: Notes
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="vellum_org.css" />
+
+* GFX Technologies
+- Textures :: KTX2. PNG should work well as source in all (or most cases), easy
+  to work with in regards to the tools I'd like to use.
+
+* To-Do List
+(Just noting things that come to mind at the moment, not exhaustive or ordered
+etc.)
+
+- [X] Find screen width and length at a given distance from camera.
+- [X] Find size of one pixel.
+- [ ] Make tile grid of quads, ability to toggle overlay of bordered
+  squares. The overlay will be used for debug (e.g. quad or other object
+  alignment) now and grid view (for visibility) can be based of this tech
+  later.
+- [ ] Frame sleep based on actual tracked frame-time.
+- [ ] Encapsulate scene objects and move out of 'main()'.
+- [ ] Clean up rendering loop (i.e. functionise etc.).
+- [-] Font rendering:
+  - [X] Decide if using vertex (line-based) text or rasterised textures
+   (prob. pre-rendered and loaded).
+    - Decision: pre-rendered font map, PNG.
+  - [X] Write a texture loader
+    - +[ ] PNG -> KTX2 Converter / wrapper.+
+    - [X] See KTX2 lib, has official utilities for making KTX2 data.
+  - [ ] Write utility that can actually assemble the font-atlas texture bits
+    into a text texture.
+
+* Stretch and Fun Goals
+- [X] See if storing textures as KTX2 (instead of PNG) takes less space on disk, if
+  so: don't distribute PNGs, but convert to platform-appropriate format and pack
+  into KTX2 before shipping the executable.
+  - Yep, KTX2 can be smaller if stored with no mipmaps. (UASTC compressed with
+    zstd 20+).

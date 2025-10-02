@@ -1,0 +1,24 @@
+/* version: 2.2.1-WIP */
+
+html {
+//    background-color: #f0e0d0;
+    background-color: #f4e0d0;
+    color: #382818;
+}
+body {
+    margin:40px auto;
+    max-width:80ex;
+    line-height:1.4;
+    font-size:20px;
+    padding:0 10px;
+}
+
+h1, h2, h3, h4, h5, h6 { color: #800000; }
+label { color: #800000; font-style: italic; }
+
+// Would be nice to have the lower-tiered topics in two columns while the higer
+// heading would be in one, but the content of the lower tiered topic contents
+// is sometimes difficult to distinguish from its neighbours given the folowing
+// setup.
+//div { column-rule: 1px dashed #806040; }
+//div.outline-4 { columns: 2; }

@@ -1,0 +1,16 @@
+# compilation artefacts
+obj/*
+exe
+
+# generated project and auxiliary files
+TAGS
+README.html
+todo.html
+
+# ide/editor temp files
+*~
+\#*\#
+.\#*
+
+# ide/editor personal config files
+#*.dir-locals*.el

@@ -1,0 +1,2 @@
+PNG to ktx2 method used (no mipmap):
+ktx create --format R8G8B8A8_SRGB --encode uastc --assign-tf sRGB --zstd 20 terminus_8x16.png terminus_8x16.ktx2
