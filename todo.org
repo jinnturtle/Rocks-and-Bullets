@@ -25,12 +25,29 @@ etc.)
   - [X] Write a texture loader
     - +[ ] PNG -> KTX2 Converter / wrapper.+
     - [X] See KTX2 lib, has official utilities for making KTX2 data.
-  - [ ] Write utility that can actually assemble the font-atlas texture bits
-    into a text texture.
+  - [ ] Write logic that actually makes text elements out of char strings.
+    - [X] Read up on rasterized text rendering techniques, plan approach.
+    - [ ] Sequence of textured quads for now as this is a more general approach.
+    - Rendering the full text into a texture can be useful for static UI
+      elements (e.g. section Titles, menu buttons), but that's relatively little
+      gain for effort needed at the moment.
 
 * Stretch and Fun Goals
-- [X] See if storing textures as KTX2 (instead of PNG) takes less space on disk, if
-  so: don't distribute PNGs, but convert to platform-appropriate format and pack
-  into KTX2 before shipping the executable.
+- [X] See if storing textures as KTX2 (instead of PNG) takes less space on disk,
+  if so: don't distribute PNGs, but convert to platform-appropriate format and
+  pack into KTX2 before shipping the executable.
   - Yep, KTX2 can be smaller if stored with no mipmaps. (UASTC compressed with
     zstd 20+).
+  - In case of storing white fonts with alpha, wrapping a PNG into a KTX2 with
+    ~ktx create~ and using ~ZSTD~ compression at level 20 or above seems end up
+    in file sizes 15-25% lower than the original PNG, and an additional 20%
+    reduction if stored in ~R8_SRGB~ format as opposed to ~R8G8B8A8_SRGB~, as I
+    only need the alpha in this case, I can adapt the shader to only use the one
+    channel. Not what the ~ktx create~ does with the PNG exactly though, 50kb
+    original size reported by ~ktxinfo~ suggests it may be storing it raw would
+    be fun to investigate.
+- [ ] Store monochrome and alpha-mask textures as raw files wrapped into
+  super-compressed one-channel (e.g. ~R8_SRGB~) KTX2 files for extra reduction
+  in file size and some shader fun
+- [ ] Side-project: Make a KTX2 viewer, may even be useful, and tag 0.0.0 is a
+  good starting point already.
