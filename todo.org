@@ -18,6 +18,9 @@ etc.)
 - [ ] Frame sleep based on actual tracked frame-time.
 - [ ] Encapsulate scene objects and move out of 'main()'.
 - [ ] Clean up rendering loop (i.e. functionise etc.).
+- [ ] Debug support: if a DEBUG enabled build, handle debug level at runtime as
+  opposed to at compile time. Recompiling (sometimes the entire project) is a
+  bit overkill if one only wants to change the verbosity.
 - [-] Font rendering:
   - [X] Decide if using vertex (line-based) text or rasterised textures
    (prob. pre-rendered and loaded).
@@ -25,7 +28,7 @@ etc.)
   - [X] Write a texture loader
     - +[ ] PNG -> KTX2 Converter / wrapper.+
     - [X] See KTX2 lib, has official utilities for making KTX2 data.
-  - [ ] Write logic that actually makes text elements out of char strings.
+  - [-] Write logic that actually makes text elements out of char strings.
     - [X] Read up on rasterized text rendering techniques, plan approach.
     - [ ] Sequence of textured quads for now as this is a more general approach.
     - Rendering the full text into a texture can be useful for static UI

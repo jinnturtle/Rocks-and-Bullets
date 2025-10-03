@@ -64,9 +64,18 @@ int main(int argc, char** argv)
     {
     const char* gl_s = (const char*) glGetString(GL_VERSION);
     DBG(0, "GL_VERSION: ", gl_s ? gl_s : "(null)");
-    // TODO Why GL_EXTENSIONS query returns null?
-    gl_s = (const char*) glGetString(GL_EXTENSIONS);
-    DBG(0, "GL_EXTENSIONS: ", gl_s ? gl_s : "(null)");
+
+    GLint gl_i {0};
+    glGetIntegerv(GL_NUM_EXTENSIONS, &gl_i);
+    DBG(0, "GL_NUM_EXTENSIONS: ", gl_i);
+    if (DEBUG >= 9) {
+        DBG(9, "GL_EXTENSIONS: vvv");
+        for (GLint i {0}; i < gl_i; ++i) {
+            gl_s =
+                reinterpret_cast<const char*>(glGetStringi(GL_EXTENSIONS, i));
+            DBG(9, "GL_EXT ", i, ": ", gl_s ? gl_s : "(null)");
+        }
+    }
     }
 #endif
 
