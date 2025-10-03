@@ -1,0 +1,10 @@
+* Text Rendering From Font Atlas
+- TODO: Why on this dear Earth of God offsetting something by 3x10 offsets it by
+  3x7, while offsetting it by 3x8, offsets it by 3x5 but upside down? Make it
+  make sense.
+- TODO: Grab texture dimensions to set size of quads etc, so I don't have to do
+  it manually once I'll start playing around with the dimensions of the font
+  atlas.
+- TODO: Maybe it's a good time to start encapsulating some of the render
+  settings and data e.g. ~shader_id~, ~glPolygonMode~, draw mode for
+  ~glDrawArrays~ are usually linked to the object drawn.

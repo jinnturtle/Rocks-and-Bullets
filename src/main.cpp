@@ -112,8 +112,10 @@ int main(int argc, char** argv)
 	glBindTexture(GL_TEXTURE_2D, texture);
 	// set the texture wrapping parameters
     // set texture wrapping to GL_REPEAT (default wrapping method)
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	// set texture filtering parameters
 	// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	// glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -155,7 +157,8 @@ int main(int argc, char** argv)
     }
 
     GLenum target, glerror;
-    result = ktxTexture_GLUpload((ktxTexture*)kTexture, &texture, &target, &glerror);
+    result =
+        ktxTexture_GLUpload((ktxTexture*)kTexture, &texture, &target, &glerror);
     if (result != KTX_SUCCESS) {
         logs::err("KTX GLUpload failed: ", ktxErrorString(result));
         return -1;
@@ -167,10 +170,19 @@ int main(int argc, char** argv)
     Model3 square_model;
     square_model.verts = std::vector{
         // 3x vert coord, 2x texture coord
+#if 1 /* TODO - remove conditional compile once done with character render POC
+         this should be off if only drawing part of the texture */
         0.0f, 0.0f, 0.0f, 0.0f, 1.0f,  // bottom left
         64.0f, 0.0f, 0.0f, 1.0f, 1.0f,  // bottom right
         0.0f, 208.0f, 0.0f, 0.0f, 0.0f, // top left
         64.0f, 208.0f, 0.0f, 1.0f, 0.0f, // top right
+#endif
+#if 1 // TODO - remove, part of character render POC via texture offset
+        0.0f, 0.0f, 0.0f,     (1.0f * 2) / 8, (1.0f * 9) / 13,  // bottom left
+        64.0f, 0.0f, 0.0f,    (1.0f * 3) / 8, (1.0f * 9) / 13,  // bottom right
+        0.0f, 208.0f, 0.0f,   (1.0f * 2) / 8, (1.0f * 10) / 13, // top left
+        64.0f, 208.0f, 0.0f,  (1.0f * 3) / 8, (1.0f * 10) / 13, // top right
+#endif
     };
 
 
